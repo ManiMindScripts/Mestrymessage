@@ -55,21 +55,14 @@ const page = () => {
          setIsSubmitting(true)
          try {
                const response = await axios.post<ApiResponse>('api/sign-up',data)
-               toast({
-                title: "success",
-                description: response.data.message
-               })
+              toast.success(response.data.message)
                router.replace(`/verify/${username}`)
                setIsSubmitting(false)
          } catch (error) {
           console.error("Error is signup of user",error)
           const axiosError = error as AxiosError<ApiResponse>
           let errorMessage = axiosError.response?.data.message
-          toast({
-            title: "Signup Error",
-            description: errorMessage,
-            variant: "destructive",
-          })
+         toast.error(errorMessage)
           setIsSubmitting(false)
          }
      }
