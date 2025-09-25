@@ -9,11 +9,12 @@ const UsernameQuerySchema = z.object({
 
 export async function GET(request: Request) {
     await dbConnect()
+    console.log("Db connect is username")
 
     try {
         const { searchParams } = new URL(request.url)
         const queryParam = {
-            username: searchParams.get('username')
+            username: searchParams.get('username') ?? ''
         }
         const res = UsernameQuerySchema.safeParse(queryParam)
         console.log(res)
@@ -35,7 +36,7 @@ export async function GET(request: Request) {
         }
         return Response.json({
             success: true,
-            message: "Username  available"
+            message: "Username is unique"
         }, { status: 200 })
     } catch (error) {
         console.error("Error Finding username", error)
