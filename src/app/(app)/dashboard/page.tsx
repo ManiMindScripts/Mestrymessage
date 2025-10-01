@@ -72,11 +72,11 @@ const page = () => {
       toast.success(response.data.message)
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>
-      toast.success(axiosError.response?.data.message || "Error to fetch message setting")
+      toast.error(axiosError.response?.data.message || "Error to fetch message setting")
     }
   }
   const { username } = session?.user as User
-  const baseUrl = `${window.location.protocol} // ${window.location.host}`
+  const baseUrl = `${window.location.protocol}//${window.location.host}`
   const profileUrl = `${baseUrl}/u/${username}`
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl)
@@ -121,7 +121,7 @@ const page = () => {
           }}
         >
           {isLoadin ? (
-            <Loader2 className="h-4 w-4 animate-ping" />
+            <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
             <RefreshCcw className="h-4 w-4" />
           )}
