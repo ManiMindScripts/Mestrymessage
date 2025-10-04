@@ -59,8 +59,8 @@ export async function POST(request: Request) {
         }
 
         const emailResponse = await sendVerificationEmail(
-            username,
             email,
+            username,
             verifyCode
         )
         if (!emailResponse.success) {
